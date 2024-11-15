@@ -1,6 +1,7 @@
 from classes.Character import Character
 from classes.Team import Team
-from app.View.display_manager import display_team, display_for_each_round
+from View.display_manager import display_team, display_for_each_round
+import random
 
 
 
@@ -30,4 +31,8 @@ team2.add_character(character6)
 # Display the characters in the teams
 display_team(team1)
 display_team(team2)
-display_for_each_round(team1, team2)
+# display_for_each_round(team1, team2)
+# Each character from team1 attacks a random enemy from team2
+for character in team1.characters:
+    if character.hp > 0:
+        character.attack_random_enemy(team2)
