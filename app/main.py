@@ -1,5 +1,5 @@
-from classes.Character import Character
-from classes.Team import Team
+from app.classes.Character import Character
+from app.classes.Team import Team
 
 
 # Function to display the characters in a team
@@ -38,3 +38,4 @@ team2.add_character(character6)
 # Display the characters in the teams
 display_team(team1)
 display_team(team2)
+display_for_each_round(team1, team2)
