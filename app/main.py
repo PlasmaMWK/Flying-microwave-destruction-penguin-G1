@@ -1,21 +1,14 @@
-from app.classes.Character import Character
-from app.classes.Team import Team
-
-
-# Function to display the characters in a team
-def display_team(team):
-    print(f"Team name: {team.name}")
-    print("Characters:")
-    for character in team.get_characters():
-        print(character)
-
+from classes.Character import Character
+from classes.Team import Team
+from View.display_manager import display_team, display_for_each_round
+import random
 
 
 
 # Create 3 characters
-character1 = Character("Alice", 10, 100)
-character2 = Character("Bob", 5, 100)
-character3 = Character("Charlie", 2, 100)
+character1 = Character("Alice", 10)
+character2 = Character("Bob", 5)
+character3 = Character("Charlie", 2)
 
 # Create a team and add the characters
 team1 = Team("Equipe 1")
@@ -24,9 +17,9 @@ team1.add_character(character2)
 team1.add_character(character3)
 
 #Create other characters
-character4 = Character("David", 9, 100)
-character5 = Character("Eve", 4, 100)
-character6 = Character("Frank", 6, 100)
+character4 = Character("David", 9)
+character5 = Character("Eve", 4)
+character6 = Character("Frank", 6)
 
 # Create an other team and add the characters
 team2 = Team("Equipe 2")
