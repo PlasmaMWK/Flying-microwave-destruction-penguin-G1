@@ -41,7 +41,7 @@ def game_loop(team1, team2):
 
         # Attaquer un ennemi aléatoire dans chaque équipe
         perform_attack(team1, team2)
-        
+
         if team2.get_hp() > 0:
             perform_attack(team2, team1)
 
@@ -52,10 +52,21 @@ def game_loop(team1, team2):
 
     print("\n--- Fin du combat ---")
     if team1.get_hp() <= 0:
-        print(f"L'équipe {team2.get_name()} a gagné. \n ○( ＾皿＾)っ Hehehe…")
+        print('''\033[92m
+ _____                      ____             _         _ 
+|_   _|__  __ _ _ __ ___   |___ \  __      _(_)_ __   | |
+  | |/ _ \/ _` | '_ ` _ \    __) | \ \ /\ / / | '_ \  | |
+  | |  __/ (_| | | | | | |  / __/   \ V  V /| | | | | |_|
+  |_|\___|\__,_|_| |_| |_| |_____|   \_/\_/ |_|_| |_| (_)
+\033[0m''')
     else:
-        print(f"L'équipe {team1.get_name()} a gagné. \n ○( ＾皿＾)っ Hehehe…")
-
+        print('''\033[92m
+ _____                      _            _         _ 
+|_   _|__  __ _ _ __ ___   / | __      _(_)_ __   | |
+  | |/ _ \/ _` | '_ ` _ \  | | \ \ /\ / / | '_ \  | |
+  | |  __/ (_| | | | | | | | |  \ V  V /| | | | | |_|
+  |_|\___|\__,_|_| |_| |_| |_|   \_/\_/ |_|_| |_| (_)
+\033[0m''')
 
 def perform_attack(attacking_team, defending_team):
     attacker = random.choice([char for char in attacking_team.get_characters() if char.get_hp() > 0])
