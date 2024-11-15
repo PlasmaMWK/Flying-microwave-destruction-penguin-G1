@@ -55,22 +55,23 @@ class TestMain(unittest.TestCase):
         self.assertIn("Bob", output)
         self.assertIn("Charlie", output)
 
-def test_attack_random_enemy_no_enemies(self):
-    empty_team = Team("Empty Team")
-    self.assertIsNone(self.character1.attack_random_enemy(empty_team))
+    def test_attack_random_enemy_no_enemies(self):
+        empty_team = Team("Empty Team")
+        self.assertIsNone(self.character1.attack_random_enemy(empty_team))
 
-def test_attack_random_enemy_character_dead(self):
-    self.character1.hp = 0
-    self.assertIsNone(self.character1.attack_random_enemy(self.team2))
+    def test_attack_random_enemy_character_dead(self):
+        self.character1.hp = 0
+        self.assertIsNone(self.character1.attack_random_enemy(self.team2))
 
-def test_attack_random_enemy_enemy_dead(self):
-    self.enemy1.hp = 0
-    self.enemy2.hp = 0
-    self.assertIsNone(self.character1.attack_random_enemy(self.team2))
+    def test_attack_random_enemy_enemy_dead(self):
+        self.character4.hp = 0
+        self.character5.hp = 0
+        self.character6.hp = 0
+        self.assertIsNone(self.character1.attack_random_enemy(self.team2))
 
-def test_attack_random_enemy(self):
-    target = self.character1.attack_random_enemy(self.team2)
-    self.assertIn(target, [enemy.name for enemy in self.team2.get_characters() if enemy.hp > 0])
+    def test_attack_random_enemy(self):
+        target = self.character1.attack_random_enemy(self.team2)
+        self.assertIn(target, [enemy.name for enemy in self.team2.get_characters() if enemy.hp > 0])
     
 if __name__ == '__main__':
     unittest.main()

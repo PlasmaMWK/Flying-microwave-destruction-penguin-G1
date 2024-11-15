@@ -63,4 +63,6 @@ class Character:
             return None
         
         enemy = random.choice(alive_enemies)
+        print(f"{self.name} attaque {enemy.name}")
+
         return enemy.name
