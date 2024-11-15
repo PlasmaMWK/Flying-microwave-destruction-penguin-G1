@@ -1,5 +1,5 @@
 import random
-
+import time
 class Character:
     """
     A class to represent a character in the game.
@@ -42,6 +42,17 @@ class Character:
     def __str__(self):
         return f"Personnage(nom={self.name}, vitesse={self.speed}, hp={self.hp})"
     
+    def is_alive(self):
+        """
+        Returns True if the character is alive, False otherwise.
+        """
+        return self.hp > 0
+    
+    def is_dead(self):
+        """
+        Returns True if the character is dead, False otherwise.
+        """
+        return self.hp <= 0
 
     
     def attack_random_enemy(self, other_team):
@@ -73,7 +84,7 @@ class Character:
             damage = 20
             enemy.hp -= damage
             if enemy.hp <= 0:
-                print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts. \033[91m{enemy.name} est mort.\033[0m🪦")
+                print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts.")
                 enemy.hp = 0
                 return enemy.name
 
@@ -85,17 +96,18 @@ class Character:
             damage = random.randint(1, 10)
             self.hp -= damage
             if enemy.hp <= 0:
-                print(f"{self.name} attaque {enemy.name} mais l'attaque est reflétée et inflige {damage} HP de dégâts à {self.name}.  \033[91m{enemy.name} est mort.\033[0m🪦")
+                print(f"{self.name} attaque {enemy.name} mais l'attaque est reflétée et inflige {damage} HP de dégâts à {self.name}. ")
                 enemy.hp = 0
                 return None
-            print(f"{self.name} attaque {enemy.name} mais l'attaque est reflétée et inflige {damage} HP de dégâts à {self.name}. {self.name} a maintenant {self.hp} HP.")
+            print(f"{self.name} attaque {enemy.name} mais l'attaque est reflétée et inflige {damage} HP de dégâts à {self.name}. \033[94mDommage Wilfried...\033[0m {self.name} a maintenant {self.hp} HP.")
+            time.sleep(1)
             return None
         
         # Normal attack
         damage = random.randint(1, 10)
         enemy.hp -= damage
         if enemy.hp <= 0:
-            print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts. \033[91m{enemy.name} est mort.\033[0m🪦")
+            print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts.")
             enemy.hp = 0
             return enemy.name
         print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts. {enemy.name} a maintenant {enemy.hp} HP.")
