@@ -2,6 +2,7 @@ from classes.Character import Character
 from classes.Team import Team
 from View.display_manager import display_team, display_for_each_round
 import random
+import time
 
 
 
@@ -49,6 +50,7 @@ def game_loop(team1, team2):
         print("\n--- État des équipes ---")
         display_team(team1)
         display_team(team2)
+        time.sleep(0.2)
 
     print("\n--- Fin du combat ---")
     if team1.get_hp() <= 0:
