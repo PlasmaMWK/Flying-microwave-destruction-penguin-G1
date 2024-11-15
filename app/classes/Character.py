@@ -64,6 +64,24 @@ class Character:
             return None
         
         enemy = random.choice(alive_enemies)
-        print(f"{self.name} attaque {enemy.name}")
+        
+        # 5% chance to deal 20 HP damage
+        if random.random() < 0.05:
+            damage = 20
+            enemy.hp -= damage
+            print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts. {enemy.name} a maintenant {enemy.hp} HP.")
+            return enemy.name
+        
+        # 5% chance for the attack to be reflected back
+        if random.random() < 0.05:
+            damage = random.randint(1, 10)
+            self.hp -= damage
+            print(f"{self.name} attaque {enemy.name} mais l'attaque est reflétée et inflige {damage} HP de dégâts à {self.name}. {self.name} a maintenant {self.hp} HP.")
+            return None
+        
+        # Normal attack
+        damage = random.randint(1, 10)
+        enemy.hp -= damage
+        print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts. {enemy.name} a maintenant {enemy.hp} HP.")
 
         return enemy.name
