@@ -1,5 +1,5 @@
 #Importing the Character class 
-from app.classes.Character import Character
+from .Character import Character
 
 
 class Team:

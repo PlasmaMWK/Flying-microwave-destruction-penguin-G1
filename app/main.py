@@ -1,5 +1,5 @@
-from app.classes.Character import Character
-from app.classes.Team import Team
+from classes.Character import Character
+from classes.Team import Team
 
 
 # Function to display the characters in a team
