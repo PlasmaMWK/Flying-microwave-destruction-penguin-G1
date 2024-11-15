@@ -40,3 +40,19 @@ class Character:
 
     def __str__(self):
         return f"Personnage(nom={self.name}, vitesse={self.speed}, hp={self.hp})"
+    
+    def attack(self, target):
+    """
+    Permet à un personnage d'attaquer un autre personnage.
+    """
+    if self.hp <= 0:
+        print(f"{self.name} est KO et ne peut pas attaquer.")
+        return
+
+    damage = random.randint(1, 10)  # Dégâts aléatoires entre 1 et 10
+    target.hp -= damage
+    print(f"{self.name} attaque {target.name} et inflige {damage} HP.")
+
+    if target.hp <= 0:
+        target.hp = 0
+        print(f"{target.name} est maintenant KO.")

@@ -54,6 +54,18 @@ class TestMain(unittest.TestCase):
         self.assertIn("Alice", output)
         self.assertIn("Bob", output)
         self.assertIn("Charlie", output)
+        
+        
+    def test_perform_attack(self):
+    # Faire attaquer un joueur de team1 contre un joueur de team2
+    perform_attack(self.team1, self.team2)
+    
+    # Vérifier que les HP d'un joueur de team2 ont été réduits
+    hp_after_attack = [char.get_hp() for char in self.team2.get_characters()]
+    self.assertTrue(any(hp < 100 for hp in hp_after_attack))
+
 
 if __name__ == '__main__':
     unittest.main()
+    
+    game_loop(team1, team2)

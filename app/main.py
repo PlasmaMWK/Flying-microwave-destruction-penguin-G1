@@ -38,3 +38,25 @@ team2.add_character(character6)
 # Display the characters in the teams
 display_team(team1)
 display_team(team2)
+
+def game_loop(team1, team2):
+    """
+    Boucle de jeu où les deux équipes s'affrontent.
+    """
+    print("\n--- Début du combat ---")
+    while True:
+        perform_attack(team1, team2)
+        perform_attack(team2, team1)
+
+        # Afficher les équipes après chaque tour
+        print("\n--- État des équipes ---")
+        display_team(team1)
+        display_team(team2)
+
+        # Vérifier si une équipe est entièrement KO
+        if not any(character.get_hp() > 0 for character in team1.get_characters()):
+            print("L'équipe 2 a gagné !")
+            break
+        if not any(character.get_hp() > 0 for character in team2.get_characters()):
+            print("L'équipe 1 a gagné !")
+            break
