@@ -1,14 +1,6 @@
 from app.classes.Character import Character
 from app.classes.Team import Team
-
-
-# Function to display the characters in a team
-def display_team(team):
-    print(f"Team name: {team.name}")
-    print("Characters:")
-    for character in team.get_characters():
-        print(character)
-
+from app.View.display_manager import display_team, display_for_each_round
 
 
 
@@ -38,3 +30,4 @@ team2.add_character(character6)
 # Display the characters in the teams
 display_team(team1)
 display_team(team2)
+display_for_each_round(team1, team2)
