@@ -5,27 +5,20 @@ from View.display_manager import display_team, display_for_each_round
 
 class TestMain(unittest.TestCase):
     def setUp(self):
-        # Create characters for team 1
-        self.character1 = Character("Alice", 10, 100)
-        self.character2 = Character("Bob", 5, 100)
-        self.character3 = Character("Charlie", 2, 100)
-
-        # Create team 1 and add characters
-        self.team1 = Team("Equipe 1")
-        self.team1.add_character(self.character1)
-        self.team1.add_character(self.character2)
-        self.team1.add_character(self.character3)
-
-        # Create characters for team 2
-        self.character4 = Character("David", 9, 100)
-        self.character5 = Character("Eve", 4, 100)
-        self.character6 = Character("Frank", 6, 100)
-
-        # Create team 2 and add characters
-        self.team2 = Team("Equipe 2")
-        self.team2.add_character(self.character4)
-        self.team2.add_character(self.character5)
-        self.team2.add_character(self.character6)
+            self.character1 = Character("Alice", 10)
+            self.character2 = Character("Bob", 8)
+            self.character3 = Character("Charlie", 2)
+            self.character4 = Character("David", 9)
+            self.character5 = Character("Eve", 4)
+            self.character6 = Character("Frank", 6)
+            self.team1 = Team("Equipe 1")
+            self.team2 = Team("Equipe 2")
+            self.team1.add_character(self.character1)
+            self.team1.add_character(self.character2)
+            self.team1.add_character(self.character3)
+            self.team2.add_character(self.character4)
+            self.team2.add_character(self.character5)
+            self.team2.add_character(self.character6)
 
     def test_team1_characters(self):
         self.assertEqual(len(self.team1.characters), 3)
@@ -55,6 +48,28 @@ class TestMain(unittest.TestCase):
         output = display_for_each_round(self.team1, self.team2)
         self.assertIn("Equipe 1", output)
         self.assertIn("Equipe 2", output)
+
+    def test_attack_random_enemy_no_enemies(self):
+            empty_team = Team("Empty Team")
+            self.assertIsNone(self.character1.attack_random_enemy(empty_team))
+
+    def test_attack_random_enemy_character_dead(self):
+        self.character1.hp = 0
+        self.assertIsNone(self.character1.attack_random_enemy(self.team2))
+
+    def test_attack_random_enemy_enemy_dead(self):
+        self.character4.hp = 0
+        self.character5.hp = 0
+        self.character6.hp = 0
+        self.assertIsNone(self.character1.attack_random_enemy(self.team2))
+
+    def test_attack_random_enemy(self):
+        targets = set()
+        for _ in range(100):  # Run the attack multiple times to check randomness
+            target = self.character1.attack_random_enemy(self.team2)
+            targets.add(target)
+        self.assertTrue(len(targets) > 1, "The attack should target different enemies randomly")
+
 
 if __name__ == '__main__':
     unittest.main()

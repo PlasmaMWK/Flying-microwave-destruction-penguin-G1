@@ -1,4 +1,5 @@
 import random
+
 class Character:
     """
     A class to represent a character in the game.
@@ -21,7 +22,7 @@ class Character:
     __str__():
         Returns a string representation of the character.
     """
-    def __init__(self, name: str, speed: int, hp: int):
+    def __init__(self, name: str, speed: int):
         self.name = name
         self.speed = speed
         self.hp = 100
@@ -53,12 +54,12 @@ class Character:
         Returns:
         str: The name of the enemy that was attacked, or None if no attack was made.
         """
-        if not other_team.get_characters():
+        if not other_team.characters:
             return None
         if self.hp <= 0:
             return None
         
-        alive_enemies = [enemy for enemy in other_team.get_characters() if enemy.hp > 0]
+        alive_enemies = [enemy for enemy in other_team.characters if enemy.hp > 0]
         if not alive_enemies:
             return None
         
