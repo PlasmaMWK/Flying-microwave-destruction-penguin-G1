@@ -1,4 +1,5 @@
-
+import random
+import time
 class Character:
     """
     A class to represent a character in the game.
@@ -21,7 +22,7 @@ class Character:
     __str__():
         Returns a string representation of the character.
     """
-    def __init__(self, name, speed, hp):
+    def __init__(self, name: str, speed: int):
         self.name = name
         self.speed = speed
         self.hp = 100
@@ -40,3 +41,75 @@ class Character:
 
     def __str__(self):
         return f"Personnage(nom={self.name}, vitesse={self.speed}, hp={self.hp})"
+    
+    def is_alive(self):
+        """
+        Returns True if the character is alive, False otherwise.
+        """
+        return self.hp > 0
+    
+    def is_dead(self):
+        """
+        Returns True if the character is dead, False otherwise.
+        """
+        return self.hp <= 0
+
+    
+    def attack_random_enemy(self, other_team):
+        """
+        Attacks a random enemy from the other team.
+        
+        Parameters:
+        self (Character): The character that is attacking.
+        other_team (Team): The team that the character can attack.
+        
+        Returns:
+        str: The name of the enemy that was attacked, or None if no attack was made.
+        """
+        if not other_team.characters:
+            return None
+        if self.hp <= 0:
+            self.hp = 0
+            return None
+        
+        alive_enemies = [enemy for enemy in other_team.characters if enemy.hp > 0]
+        if not alive_enemies:
+            return None
+        
+        enemy = random.choice(alive_enemies)
+
+        
+        # 5% chance to deal 20 HP damage
+        if random.random() < 0.05:
+            damage = 20
+            enemy.hp -= damage
+            if enemy.hp <= 0:
+                print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts.")
+                enemy.hp = 0
+                return enemy.name
+
+            print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts. {enemy.name} a maintenant {enemy.hp} HP.")
+            return enemy.name
+        
+        # 5% chance for the attack to be reflected back
+        if random.random() < 0.05:
+            damage = random.randint(1, 10)
+            self.hp -= damage
+            if enemy.hp <= 0:
+                print(f"{self.name} attaque {enemy.name} mais l'attaque est reflétée et inflige {damage} HP de dégâts à {self.name}. ")
+                enemy.hp = 0
+                return None
+            print(f"{self.name} attaque {enemy.name} mais l'attaque est reflétée et inflige {damage} HP de dégâts à {self.name}. \033[94mDommage Wilfried...\033[0m {self.name} a maintenant {self.hp} HP.")
+            time.sleep(1)
+            return None
+        
+        # Normal attack
+        damage = random.randint(1, 10)
+        enemy.hp -= damage
+        if enemy.hp <= 0:
+            print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts.")
+            enemy.hp = 0
+            return enemy.name
+        print(f"{self.name} attaque {enemy.name} et inflige {damage} HP de dégâts. {enemy.name} a maintenant {enemy.hp} HP.")
+
+        return enemy.name

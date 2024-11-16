@@ -1,5 +1,5 @@
 #Importing the Character class 
-from app.classes.Character import Character
+from .Character import Character
 
 
 class Team:
@@ -31,3 +31,12 @@ class Team:
 
     def get_characters(self):
         return self.characters
+    
+    def get_hp(self):
+        """
+        Returns the sum of health points of all characters in the team.
+        """
+        return sum(character.get_hp() for character in self.characters)
+    
+    def get_name(self):
+        return self.name
