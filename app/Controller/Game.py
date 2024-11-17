@@ -18,14 +18,16 @@ class Game:
         return self.winner
 
     def perform_attack(self, attacking_team, defending_team):
-        attacker = random.choice(
-            [char for char in attacking_team.get_characters() if char.get_hp() > 0])
+        # get the attacker with the highest speed and still alive
+        attacker = max([char for char in attacking_team.get_characters(
+        ) if char.is_alive()], key=lambda x: x.get_speed())
+
         return attacker.attack_random_enemy(defending_team)
 
     def round(self, round_nb):
         attack1 = self.perform_attack(self.team1, self.team2)
 
-        if self.team2.get_hp() > 0:
+        if self.team2.is_alive():
             attack2 = self.perform_attack(self.team2, self.team1)
         else:
             attack2 = None
@@ -42,12 +44,12 @@ class Game:
 
     def start(self):
 
-        while self.team1.get_hp() > 0 and self.team2.get_hp() > 0:
+        while self.team1.is_alive() and self.team2.is_alive():
             time.sleep(0.5)
             self.round(self.round_nb)
             self.round_nb += 1
 
-        if self.team1.get_hp() <= 0:
+        if self.team1.is_dead():
             self.winner = self.team2
             self.loser = self.team1
         else:

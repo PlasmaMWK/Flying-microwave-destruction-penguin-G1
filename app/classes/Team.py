@@ -16,8 +16,11 @@ class Team:
     def get_hp(self):
         return sum(character.get_hp() for character in self.characters)
 
-    def get_is_alive(self):
+    def is_alive(self):
         return self.get_hp() > 0
+
+    def is_dead(self):
+        return self.get_hp() <= 0
 
     def get_name(self):
         return self.name

@@ -27,10 +27,10 @@ def display_attack(label):
 
 
 def display_team(team):
-    if not team.get_is_alive():
-        display_red_text(f"-- {team.name} --")
+    if not team.is_alive():
+        display_red_text(f"\t-- {team.name} --")
     else:
-        print(f"-- {team.name} --")
+        print(f"\t-- {team.name} --")
 
     characters = team.get_characters()
     if characters is None:
@@ -56,15 +56,15 @@ def display_teams(team1, team2):
 
 def display_for_each_round(team1, team2, round_nb=0):
     clear_console()
-    print(f"\t\t **** Round {round_nb} ****")
+    print(f"\t\t**** Round {round_nb} ****")
 
     display_teams(team1, team2)
 
 
 def display_winner(team):
 
-    display_blinking_text(f"***********************************")
-    display_blinking_text(f"*         Congrats {team.name.ljust(15)}*")
-    display_blinking_text(f"*            YOU WIN 🏆           *")
-    display_blinking_text(f"***********************************")
+    display_blinking_text(f"  ***********************************")
+    display_blinking_text(f"  *         Congrats {team.name.ljust(15)}*")
+    display_blinking_text(f"  *            YOU WIN 🏆           *")
+    display_blinking_text(f"  ***********************************")
     print()

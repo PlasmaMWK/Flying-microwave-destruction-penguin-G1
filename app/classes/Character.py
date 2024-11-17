@@ -2,28 +2,6 @@ import random
 
 
 class Character:
-    """
-    A class to represent a character in the game.
-    Attributes
-    ----------
-    name : str
-        The name of the character.
-    speed : int
-        The speed of the character.
-    hp : int
-        The health points of the character, initialized to 100.
-    Methods
-    -------
-    get_name():
-        Returns the name of the character.
-    get_speed():
-        Returns the speed of the character.
-    get_hp():
-        Returns the health points of the character.
-    __str__():
-        Returns a string representation of the character.
-    """
-
     def __init__(self, name: str, speed: int):
         self.name = name
         self.speed = speed
@@ -39,15 +17,9 @@ class Character:
         return self.hp
 
     def is_alive(self):
-        """
-        Returns True if the character is alive, False otherwise.
-        """
         return self.hp > 0
 
     def is_dead(self):
-        """
-        Returns True if the character is dead, False otherwise.
-        """
         return self.hp <= 0
 
     def attack_random_enemy(self, other_team):
@@ -58,7 +30,7 @@ class Character:
             return None
 
         alive_enemies = [
-            enemy for enemy in other_team.characters if enemy.hp > 0]
+            enemy for enemy in other_team.characters if enemy.is_alive()]
         if not alive_enemies:
             return None
 
@@ -78,8 +50,8 @@ class Character:
         if random.random() < 0.05:
             damage = random.randint(1, 10)
             self.hp -= damage
-            if enemy.hp <= 0:
-                enemy.hp = 0
+            if self.hp <= 0:
+                self.hp = 0
                 return f"{self.name} attacks {enemy.name} but kills himself !!"
 
             return f"{self.name} attacks {enemy.name} but the attack is refleted, he deals {damage} HP damage to himself."
