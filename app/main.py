@@ -24,7 +24,6 @@ game = Game(team1, team2)
 
 # Display the teams
 clear_console()
-print()
 display_teams(team1, team2)
 
 start_txt = " Start the game? Press Enter to continue..."

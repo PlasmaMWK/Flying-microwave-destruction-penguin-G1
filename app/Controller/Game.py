@@ -1,9 +1,5 @@
-import classes.Team as Team
-import classes.Character as Character
-import random
 import time
-import os
-from View.display_manager import display_winner, display_for_each_round, clear_console, display_attack
+from View.display_manager import display_winner, display_for_each_round, display_attack
 
 
 class Game:
@@ -30,17 +26,12 @@ class Game:
         if self.team2.is_alive():
             attack2 = self.perform_attack(self.team2, self.team1)
         else:
-            attack2 = None
+            attack2 = ""
 
         display_for_each_round(self.team1, self.team2, round_nb)
 
         display_attack(attack1)
-        if attack2:
-            display_attack(attack2)
-        else:
-            print()
-
-        print()
+        display_attack(attack2)
 
     def start(self):
 

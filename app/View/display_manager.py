@@ -23,7 +23,7 @@ def display_green_text(text):
 
 
 def display_attack(label):
-    print(label)
+    print(f"  {label}")
 
 
 def display_team(team):
@@ -31,6 +31,7 @@ def display_team(team):
         display_red_text(f"\t-- {team.name} --")
     else:
         print(f"\t-- {team.name} --")
+    print()
 
     characters = team.get_characters()
     if characters is None:
@@ -43,22 +44,28 @@ def display_team(team):
         speed = str(character.speed).ljust(3)
 
         if character.is_alive():
-            print(f"{name} ⚡️{speed} ❤️ {"|" * character.get_hp()}")
+            print(f"{name} ⚡️{speed} [{"█" * character.get_hp()}] ❤️")
+            print()
         else:
             display_red_text(f"{name} ⚡️{speed} 🪦")
+            print()
     print()
 
 
 def display_teams(team1, team2):
+    print()
     display_team(team1)
+    print()
     display_team(team2)
+    print()
 
 
 def display_for_each_round(team1, team2, round_nb=0):
     clear_console()
-    print(f"\t\t**** Round {round_nb} ****")
-
     display_teams(team1, team2)
+    print(f"\t**** Round {round_nb} ****")
+    print(f"\t------------------")
+    print()
 
 
 def display_winner(team):

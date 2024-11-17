@@ -1,6 +1,3 @@
-from .Character import Character
-
-
 class Team:
 
     def __init__(self, name):
