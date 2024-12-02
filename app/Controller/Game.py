@@ -13,13 +13,6 @@ class Game:
     def get_winner(self):
         return self.winner
 
-    def perform_attack(self, attacking_team, defending_team):
-        # get the attacker with the highest speed and still alive
-        attacker = max([char for char in attacking_team.get_characters(
-        ) if char.is_alive()], key=lambda x: x.get_speed())
-
-        return attacker.attack_random_enemy(defending_team)
-
     def round(self, round_nb):
         attackList = []
         combined_team = self.team1.get_characters() + self.team2.get_characters()
@@ -29,9 +22,15 @@ class Game:
         for player in combined_team:
             if player.is_alive():
                 if player in self.team1.get_characters():
-                    attackList.append(player.attack_random_enemy(self.team2))
+                    if player == self.team1.get_healer() and self.team1.get_hp() - player.get_hp() > 0 and self.team1.get_original_hp() - player.get_hp() != self.team1.get_hp() - player.get_hp():
+                        attackList.append(player.heal_random_ally(self.team1))
+                    else:
+                        attackList.append(player.attack_random_enemy(self.team2))
                 else:
-                    attackList.append(player.attack_random_enemy(self.team1))
+                    if player == self.team2.get_healer() and self.team2.get_hp() - player.get_hp() > 0:
+                        attackList.append(player.heal_random_ally(self.team2))
+                    else:
+                        attackList.append(player.attack_random_enemy(self.team1))
 
         display_for_each_round(self.team1, self.team2, round_nb)
 

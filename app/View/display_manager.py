@@ -26,6 +26,18 @@ def display_attack(label):
     if label:
         print(f"  {label}")
 
+def display_heal_bar(character):
+    score = int(character.hp / character.original_hp * 100)
+    if score >= 75:
+        heart = "💚"
+    elif score >= 50:
+        heart = "💛"
+    elif score >= 25:
+        heart = "🧡"
+    else:
+        heart = "❤️"
+    return f"[{"█" * score}] {heart}"
+
 
 def display_team(team):
     if not team.is_alive():
@@ -44,13 +56,16 @@ def display_team(team):
         if character == team.get_tank():
             name = f"{character.name} 🎯"
             name = name.ljust(14)
+        elif character == team.get_healer():
+            name = f"{character.name} 🩺"
+            name = name.ljust(14)
         else:    
             name = character.name
             name = name.ljust(15)
         speed = str(character.speed).ljust(3)
 
         if character.is_alive():
-            print(f"{name} ⚡️{speed} [{"█" * character.get_hp()}] ❤️")
+            print(f"{name} ⚡️{speed} {display_heal_bar(character)}")
             print()
         else:
             display_red_text(f"{name} ⚡️{speed} 🪦")

@@ -4,11 +4,14 @@ class Team:
         self.name = name
         self.characters = []
         self.tank = None
+        self.healer = None
 
-    def add_character(self, character, tank=False):
+    def add_character(self, character, tank=False, healer=False):
         self.characters.append(character)
         if tank:
             self.tank = character
+        if healer:
+            self.healer = character
 
     def get_characters(self):
         return self.characters
@@ -27,3 +30,9 @@ class Team:
     
     def get_tank(self):
         return self.tank
+    
+    def get_healer(self):
+        return self.healer
+    
+    def get_original_hp(self):
+        return sum(character.original_hp for character in self.characters)
