@@ -75,3 +75,14 @@ def display_winner(team):
     display_blinking_text(f"  *            YOU WIN 🏆           *")
     display_blinking_text(f"  ***********************************")
     print()
+    
+
+def display_logs(logs):
+    print()
+    for log in logs:
+        display_blinking_text(f"Round {log['round']}")
+        for attack in log['attacks']:
+            if attack:
+                display_attack(attack)
+        print()
+        time.sleep(1)
