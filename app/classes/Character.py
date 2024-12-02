@@ -47,7 +47,7 @@ class Character:
                 enemy.hp = 0
                 return f"{self.name} kills {enemy.name}!"
 
-            return f"{self.name} attacks {enemy.name} and deals {damage} HP damage."
+            return f"{self.name} attacks {enemy.name} and deals {damage} HP damage. 💥"
 
         # 5% chance for the attack to be reflected back
         if random.random() < 0.05:
@@ -55,9 +55,9 @@ class Character:
             self.hp -= damage
             if self.hp <= 0:
                 self.hp = 0
-                return f"{self.name} attacks {enemy.name} but kills himself !!"
+                return f"{self.name} attacks {enemy.name} but kills himself !! 😵"
 
-            return f"{self.name} attacks {enemy.name} but the attack is refleted, he deals {damage} HP damage to himself."
+            return f"{self.name} attacks {enemy.name} but the attack is refleted, he deals {damage} HP damage to himself.  😵‍💫"
 
         # Normal attack
         damage = random.randint(1, 10)
@@ -66,4 +66,4 @@ class Character:
             enemy.hp = 0
             return f"{self.name} kills {enemy.name}!"
 
-        return f"{self.name} attacks {enemy.name} and deals {damage} HP damage."
+        return f"{self.name} attacks {enemy.name} and deals {damage} HP damage. 🤜"
