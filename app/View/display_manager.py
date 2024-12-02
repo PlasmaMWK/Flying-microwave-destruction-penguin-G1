@@ -2,82 +2,67 @@ import random
 import time
 import os
 
+
 def clear_console():
     if os.name == 'nt':  # Pour Windows
         os.system('cls')
     else:  # Pour macOS et Linux
         os.system('clear')
 
-# Function to display the characters in a team
+
+
+def display(text):
+    print(text)
+
+def display_attack(label):
+    print(f"  {label}")
+
+
 def display_team(team):
-    print(f"Team name: {team.name}")
-    print("Characters:")
-    for character in team.get_characters():
-        print(character)
-
-
-# Function to display the characters and their stats in a team for each round
-def display_for_each_round(team1, team2):
-    i = 1
-    while team1.is_alive() and team2.is_alive():
-        print(f"Round {i+1} :")
-        team1.attack(team2)
-        display_team(team2)
-        team2.attack(team1)
-        display_team(team1)
-        i+=1
-
-# Function to display all dead characters in a team
-def display_dead_characters(team):
-    for character in team.get_characters():
-        if character.get_hp() == 0:
-            print(f"\033[91m{character.name} est mort.\033[0m🪦")
-
-# Function to simulate the game loop
-def game_loop(team1, team2):
-    """
-    Boucle de jeu où les deux équipes s'affrontent.
-    """
-    print("\n--- Début du combat ---")
-    round = 0
-    while team1.get_hp() > 0 and team2.get_hp() > 0:
-        round += 1
-        # Attaquer un ennemi aléatoire dans chaque équipe
-        print(f"\n--- Round {round} ---")
-        perform_attack(team1, team2)
-
-        if team2.get_hp() > 0:
-            perform_attack(team2, team1)
-            # Afficher les équipes après chaque tour
-        display_dead_characters(team1)
-        display_dead_characters(team2)
-        time.sleep(0.4)
-        clear_console()
-
-    print("\n--- Fin du combat ---")
-    if team1.get_hp() <= 0:
-        print('''\033[92m
- _____                      ____             _         _ 
-|_   _|__  __ _ _ __ ___   |___ \  __      _(_)_ __   | |
-  | |/ _ \/ _` | '_ ` _ \    __) | \ \ /\ / / | '_ \  | |
-  | |  __/ (_| | | | | | |  / __/   \ V  V /| | | | | |_|
-  |_|\___|\__,_|_| |_| |_| |_____|   \_/\_/ |_|_| |_| (_)
-\033[0m''')
-        display_dead_characters(team1)
-        display_dead_characters(team2)
-
+    if not team.is_alive():
+        display(f"\t-- {team.name} --")
     else:
-        print('''\033[92m   
- _____                      _            _         _ 
-|_   _|__  __ _ _ __ ___   / | __      _(_)_ __   | |
-  | |/ _ \/ _` | '_ ` _ \  | | \ \ /\ / / | '_ \  | |
-  | |  __/ (_| | | | | | | | |  \ V  V /| | | | | |_|
-  |_|\___|\__,_|_| |_| |_| |_|   \_/\_/ |_|_| |_| (_)
-\033[0m''')
-        display_dead_characters(team1)
-        display_dead_characters(team2)
+        print(f"\t-- {team.name} --")
+    print()
+
+    characters = team.get_characters()
+    if characters is None:
+        characters = []
+
+    characters.sort(key=lambda x: x.speed, reverse=True)
+
+    for character in characters:
+        name = character.name.ljust(15)
+        speed = str(character.speed).ljust(3)
+
+        if character.is_alive():
+            print(f"{name} {speed} [{"█" * character.get_hp()}] HP: {character.get_hp()}")
+            print()
+        else:
+            display(f"{name} {speed} 🪦")
+            print()
+    print()
 
 
-def perform_attack(attacking_team, defending_team):
-    attacker = random.choice([char for char in attacking_team.get_characters() if char.get_hp() > 0])
-    attacker.attack_random_enemy(defending_team)
+def display_teams(team1, team2):
+    print()
+    display_team(team1)
+    print()
+    display_team(team2)
+    print()
+
+
+def display_for_each_round(team1, team2, round_nb=0):
+    clear_console()
+    display_teams(team1, team2)
+    print(f"\t**** Round {round_nb} ****")
+    print(f"\t------------------")
+    print()
+
+
+def display_winner(team):
+
+    print()
+    print()
+    print(f"\t-- {team.name} WIN --")
+    print()
