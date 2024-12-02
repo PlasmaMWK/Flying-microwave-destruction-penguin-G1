@@ -3,9 +3,12 @@ class Team:
     def __init__(self, name):
         self.name = name
         self.characters = []
+        self.tank = None
 
-    def add_character(self, character):
+    def add_character(self, character, tank=False):
         self.characters.append(character)
+        if tank:
+            self.tank = character
 
     def get_characters(self):
         return self.characters
@@ -21,3 +24,6 @@ class Team:
 
     def get_name(self):
         return self.name
+    
+    def get_tank(self):
+        return self.tank

@@ -41,7 +41,12 @@ def display_team(team):
     characters.sort(key=lambda x: x.speed, reverse=True)
 
     for character in characters:
-        name = character.name.ljust(15)
+        if character == team.get_tank():
+            name = f"{character.name} 🎯"
+            name = name.ljust(14)
+        else:    
+            name = character.name
+            name = name.ljust(15)
         speed = str(character.speed).ljust(3)
 
         if character.is_alive():
