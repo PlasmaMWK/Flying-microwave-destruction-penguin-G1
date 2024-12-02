@@ -75,7 +75,8 @@ def display_for_each_round(team1, team2, round_nb=0):
 
 
 def display_winner(team):
-
+    print()
+    print()
     display_blinking_text(f"  ***********************************")
     display_blinking_text(f"  *         Congrats {team.name.ljust(15)}*")
     display_blinking_text(f"  *            YOU WIN 🏆           *")

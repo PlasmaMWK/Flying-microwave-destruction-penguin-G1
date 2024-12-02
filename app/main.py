@@ -27,7 +27,11 @@ clear_console()
 display_teams(team1, team2)
 
 start_txt = " Start the game? Press Enter to continue..."
-input(f"\033[5;92m{start_txt}\033[0m")
+log_txt = "Press Enter to display the logs of the current game..."
+
+input(f"\033[5;33m{start_txt}\033[0m")
 logs = game.start()
-input("Press Enter to display the logs of the current game...")
+print()
+input(f"\033[5;33m{log_txt}\033[0m")
+
 display_logs(logs)
