@@ -10,9 +10,17 @@ def clear_console():
         os.system('clear')
 
 
+def display_blinking_text(text):
+    print(f"\033[5;92m{text}\033[0m")
 
-def display(text):
-    print(text)
+
+def display_red_text(text):
+    print(f"\033[31m{text}\033[0m")
+
+
+def display_green_text(text):
+    print(f"\033[92m{text}\033[0m")
+
 
 def display_attack(label):
     print(f"  {label}")
@@ -20,7 +28,7 @@ def display_attack(label):
 
 def display_team(team):
     if not team.is_alive():
-        display(f"\t-- {team.name} --")
+        display_red_text(f"\t-- {team.name} --")
     else:
         print(f"\t-- {team.name} --")
     print()
@@ -36,10 +44,10 @@ def display_team(team):
         speed = str(character.speed).ljust(3)
 
         if character.is_alive():
-            print(f"{name} {speed} [{"█" * character.get_hp()}] HP: {character.get_hp()}")
+            print(f"{name} ⚡️{speed} [{"█" * character.get_hp()}] ❤️")
             print()
         else:
-            display(f"{name} {speed} 🪦")
+            display_red_text(f"{name} ⚡️{speed} 🪦")
             print()
     print()
 
@@ -62,7 +70,8 @@ def display_for_each_round(team1, team2, round_nb=0):
 
 def display_winner(team):
 
-    print()
-    print()
-    print(f"\t-- {team.name} WIN --")
+    display_blinking_text(f"  ***********************************")
+    display_blinking_text(f"  *         Congrats {team.name.ljust(15)}*")
+    display_blinking_text(f"  *            YOU WIN 🏆           *")
+    display_blinking_text(f"  ***********************************")
     print()
