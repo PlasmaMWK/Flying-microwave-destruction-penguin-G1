@@ -23,7 +23,8 @@ def display_green_text(text):
 
 
 def display_attack(label):
-    print(f"  {label}")
+    if label:
+        print(f"  {label}")
 
 
 def display_team(team):
@@ -74,9 +75,21 @@ def display_for_each_round(team1, team2, round_nb=0):
 
 
 def display_winner(team):
-
+    print()
+    print()
     display_blinking_text(f"  ***********************************")
     display_blinking_text(f"  *         Congrats {team.name.ljust(15)}*")
     display_blinking_text(f"  *            YOU WIN 🏆           *")
     display_blinking_text(f"  ***********************************")
     print()
+    
+
+def display_logs(logs):
+    print()
+    round_number = 1
+    for round_logs in logs:
+        display_green_text(f"\t**** Round {round_number} ****")
+        for log in round_logs:
+            display_attack(log)
+        round_number += 1
+        print()

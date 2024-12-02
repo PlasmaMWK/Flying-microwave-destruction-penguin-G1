@@ -2,7 +2,7 @@ from classes.Character import Character
 from classes.Team import Team
 from Controller.Game import Game
 
-from View.display_manager import display_teams, clear_console
+from View.display_manager import display_teams, clear_console, display_logs
 
 # Create a team and add the characters
 team1 = Team("Team 1")
@@ -27,5 +27,11 @@ clear_console()
 display_teams(team1, team2)
 
 start_txt = " Start the game? Press Enter to continue..."
-input(f"\033[5;92m{start_txt}\033[0m")
-game.start()
+log_txt = "Press Enter to display the logs of the current game..."
+
+input(f"\033[5;33m{start_txt}\033[0m")
+logs = game.start()
+print()
+input(f"\033[5;33m{log_txt}\033[0m")
+
+display_logs(logs)
