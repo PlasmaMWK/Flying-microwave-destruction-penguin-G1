@@ -39,7 +39,6 @@ class Game:
             if attack:
                 display_attack(attack)
 
-
     def start(self):
 
         while self.team1.is_alive() and self.team2.is_alive():
