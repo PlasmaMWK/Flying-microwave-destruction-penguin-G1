@@ -2,10 +2,10 @@ import random
 
 
 class Character:
-    def __init__(self, name: str, speed: int):
+    def __init__(self, name: str, speed: int, stamina: int):
         self.name = name
         self.speed = speed
-        self.hp = 100
+        self.hp = 10 * stamina
 
     def get_name(self):
         return self.name
@@ -34,7 +34,10 @@ class Character:
         if not alive_enemies:
             return None
 
-        enemy = random.choice(alive_enemies)
+        if other_team.get_tank() and other_team.get_tank().is_alive():
+            enemy = other_team.get_tank()
+        else:
+            enemy = random.choice(alive_enemies)
 
         # 5% chance to deal 20 HP damage
         if random.random() < 0.05:
