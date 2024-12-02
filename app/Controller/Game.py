@@ -9,7 +9,6 @@ class Game:
         self.round_nb = 1
         self.winner = None
         self.loser = None
-        self.log = []
 
     def get_winner(self):
         return self.winner
@@ -39,18 +38,15 @@ class Game:
         for attack in attackList:
             if attack:
                 display_attack(attack)
+
         return attackList
 
 
     def start(self):
+        log = []
         while self.team1.is_alive() and self.team2.is_alive():
             time.sleep(1)
-            self.log = []
-
-            self.log.append({
-                'round': self.round_nb,
-                'attacks': self.round(self.round_nb)
-            })
+            log.append(self.round(self.round_nb))
             self.round_nb += 1
 
         if self.team1.is_dead():
@@ -61,4 +57,4 @@ class Game:
             self.loser = self.team2
 
         display_winner(self.winner)
-        
+        return log

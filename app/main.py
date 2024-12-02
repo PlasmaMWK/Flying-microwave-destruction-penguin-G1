@@ -28,6 +28,6 @@ display_teams(team1, team2)
 
 start_txt = " Start the game? Press Enter to continue..."
 input(f"\033[5;92m{start_txt}\033[0m")
-game.start()
+logs = game.start()
 input("Press Enter to display the logs of the current game...")
-display_logs(game.log)
+display_logs(logs)
