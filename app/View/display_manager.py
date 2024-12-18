@@ -64,11 +64,11 @@ def display_team(team):
             name = name.ljust(15)
         speed = str(character.speed).ljust(3)
         if character.weapon:
-            name = str(character.weapon) + "  " + name
+            name = str(character.weapon) + " " + name
         else:
             name = "   " + name
         if character.shield:
-            name = "🛡️ " + name
+            name = "🛡️" + name
         else:
             name = "  " + name
 
