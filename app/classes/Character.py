@@ -1,13 +1,15 @@
 import random
+from classes.Weapon import Weapon
 
 
 class Character:
-    def __init__(self, name: str, speed: int, stamina: int):
+    def __init__(self, name: str, speed: int, stamina: int, weapon=None):
         self.name = name
         self.speed = speed
         self.stamina = stamina
         self.original_hp = 10 * stamina
         self.hp = self.original_hp
+        self.weapon = weapon
 
     def get_name(self):
         return self.name
@@ -27,6 +29,8 @@ class Character:
     def action_lib(self, player2, damage, action):
         match action:
             case "attack":
+                if self.weapon:
+                    return f"{self.weapon}  {self.name} attacks {player2.name} and deals {damage} HP damage."
                 return f"🤜 {self.name} attacks {player2.name} and deals {damage} HP damage."
             case 'kills':
                 return f"💀 {self.name} kills {player2.name}!"
@@ -40,6 +44,7 @@ class Character:
                 return f"🚑 {self.name} heals {player2.name} and restores critical {damage} HP."
             case 'heal_reflected':
                 return f"🩹 {self.name} tries to heal {player2.name} but the heal is reflected, he deals {damage} HP damage to himself."
+
             case _:
                 return "Invalid action"
 
@@ -63,6 +68,8 @@ class Character:
         # 5% chance to deal 20 HP damage
         if random.random() < 0.05:
             damage = 20
+            if self.weapon:
+                damage = self.weapon.new_damage(damage)
             enemy.hp -= damage
             if enemy.hp <= 0:
                 enemy.hp = 0
@@ -73,6 +80,8 @@ class Character:
         # 5% chance for the attack to be reflected back
         if random.random() < 0.05:
             damage = random.randint(1, 10)
+            if self.weapon:
+                damage = self.weapon.new_damage(damage)
             self.hp -= damage
             if self.hp <= 0:
                 self.hp = 0
@@ -82,6 +91,8 @@ class Character:
 
         # Normal attack
         damage = random.randint(1, 10)
+        if self.weapon:
+            damage = self.weapon.new_damage(damage)
         enemy.hp -= damage
         if enemy.hp <= 0:
             enemy.hp = 0
