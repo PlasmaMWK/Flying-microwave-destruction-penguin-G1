@@ -67,6 +67,10 @@ def display_team(team):
             name = str(character.weapon) + "  " + name
         else:
             name = "   " + name
+        if character.shield:
+            name = "🛡️ " + name
+        else:
+            name = "  " + name
 
         if character.is_alive():
             print(f"{name} ⚡️{speed} {display_heal_bar(character)}")

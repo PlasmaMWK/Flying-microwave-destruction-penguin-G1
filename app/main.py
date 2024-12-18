@@ -7,8 +7,8 @@ from View.display_manager import display_teams, clear_console, display_logs
 
 # Create a team and add the characters
 team1 = Team("Team 1")
-team1.add_character(Character("Alex", speed=5, stamina=4, weapon=Weapon()))
-team1.add_character(Character("Kevin", speed=7, stamina=10), tank=True)
+team1.add_character(Character("Alex", speed=5, stamina=4, weapon=Weapon(), shield=True))
+team1.add_character(Character("Kevin", speed=7, stamina=10, shield=True), tank=True)
 team1.add_character(Character("Aymeric", speed=10, stamina=8))
 team1.add_character(Character("Chris", speed=6, stamina=9))
 team1.add_character(Character("Youness", speed=6, stamina=3), healer=True)
