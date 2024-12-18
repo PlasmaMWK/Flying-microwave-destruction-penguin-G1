@@ -33,19 +33,6 @@ team1 = create_team(team1_name,nb_team)
 team2 = create_team(team2_name,nb_team)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 def player_class(team):
     tank = input(f"Who is the tank of {team.name} ? (number) :")
     healer = input(f"Who is the healer of {team.name} ? (number) :")
@@ -57,24 +44,8 @@ def player_class(team):
         healer = int(healer)
         if healer <= len(team.characters) and healer > 0:
             team.healer = team.characters[healer-1]
-            
+
     return team
-
-
-# team1 = Team("Team 1")
-# team1.add_character(Character("Alex", speed=5, stamina=4, weapon=Weapon(), shield=True))
-# team1.add_character(Character("Kevin", speed=7, stamina=10, shield=True), tank=True)
-# team1.add_character(Character("Aymeric", speed=10, stamina=8))
-# team1.add_character(Character("Chris", speed=6, stamina=9))
-# team1.add_character(Character("Youness", speed=6, stamina=3), healer=True)
-
-# Create an other team and add the characters
-# team2 = Team("Team 2")
-# team2.add_character(Character("Lea", speed=10, stamina=4))
-# team2.add_character(Character("Théo", speed=6, stamina=5))
-# team2.add_character(Character("Wilfried", speed=1, stamina=8), tank=True)
-# team2.add_character(Character("Zakaria", speed=3, stamina=1))
-# team2.add_character(Character("Alexis", speed=2, stamina=2), healer=True)   
 
 game = Game(team1, team2)
 
