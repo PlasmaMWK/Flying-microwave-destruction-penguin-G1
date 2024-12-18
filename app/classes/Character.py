@@ -17,8 +17,8 @@ class Character:
 
     def get_name(self):
         if self.shield:
-            return f"🛡️ {self.name}"
-        return f"{self.name}"
+            return f"🛡️ {self.name[4:]}"
+        return f"{self.name[4:]}"
 
     def get_speed(self):
         return self.speed
@@ -33,23 +33,25 @@ class Character:
         return self.hp <= 0
     
     def action_lib(self, player2, damage, action):
+        name = self.name[4:]
+        enemy_name = player2.get_name()
         match action:
             case "attack":
                 if self.weapon:
-                    return f"{self.weapon}  {self.name} attacks {player2.get_name()} and deals {damage} HP damage."
-                return f"🤜 {self.name} attacks {player2.get_name()} and deals {damage} HP damage."
+                    return f"{self.weapon}  {name} attacks {enemy_name} and deals {damage} HP damage."
+                return f"🤜 {name} attacks {enemy_name} and deals {damage} HP damage."
             case 'kills':
-                return f"💀 {self.name} kills {player2.get_name()}!"
+                return f"💀 {name} kills {enemy_name}!"
             case 'reflected':
-                return f"🥴 {self.name} attacks {player2.get_name()} but the attack is refleted, he deals {damage} HP damage to himself."
+                return f"🥴 {name} attacks {enemy_name} but the attack is refleted, he deals {damage} HP damage to himself."
             case 'critical':
-                return f"💥 {self.name} attacks {player2.get_name()} and deals fatality {damage} HP damage."
+                return f"💥 {name} attacks {enemy_name} and deals fatality {damage} HP damage."
             case 'heal':
-                return f"💉 {self.name} heals {player2.get_name()} and restores {damage} HP."
+                return f"💉 {name} heals {enemy_name} and restores {damage} HP."
             case 'critical_heal':
-                return f"🚑 {self.name} heals {player2.get_name()} and restores critical {damage} HP."
+                return f"🚑 {name} heals {enemy_name} and restores critical {damage} HP."
             case 'heal_reflected':
-                return f"🩹 {self.name} tries to heal {player2.get_name()} but the heal is reflected, he deals {damage} HP damage to himself."
+                return f"🩹 {name} tries to heal {enemy_name} but the heal is reflected, he deals {damage} HP damage to himself."
 
             case _:
                 return "Invalid action"

@@ -51,7 +51,6 @@ def display_team(team):
         characters = []
 
     characters.sort(key=lambda x: x.speed, reverse=True)
-
     for character in characters:
         if character == team.get_tank():
             name = f"{character.name} 🎯"
@@ -78,6 +77,7 @@ def display_team(team):
         else:
             display_red_text(f"{name} ⚡️{speed} 🪦")
             print()
+
     print()
 
 
