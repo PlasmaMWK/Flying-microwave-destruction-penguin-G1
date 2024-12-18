@@ -3,13 +3,17 @@ from classes.Weapon import Weapon
 
 
 class Character:
-    def __init__(self, name: str, speed: int, stamina: int, weapon=None):
+    def __init__(self, name: str, speed: int, stamina: int, weapon=None, shield=False):
         self.name = name
+        if shield:
+            self.speed = speed - 1
         self.speed = speed
         self.stamina = stamina
         self.original_hp = 10 * stamina
         self.hp = self.original_hp
         self.weapon = weapon
+        self.shield = shield
+
 
     def get_name(self):
         return self.name
